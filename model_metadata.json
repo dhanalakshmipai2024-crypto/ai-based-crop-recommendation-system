@@ -1,0 +1,1041 @@
+{
+  "model_type": "RandomForestClassifier",
+  "n_estimators": 100,
+  "features": [
+    "N",
+    "P",
+    "K",
+    "temperature",
+    "humidity",
+    "ph",
+    "rainfall"
+  ],
+  "classes": [
+    "apple",
+    "banana",
+    "blackgram",
+    "chickpea",
+    "coconut",
+    "coffee",
+    "cotton",
+    "grapes",
+    "jute",
+    "kidneybeans",
+    "lentil",
+    "maize",
+    "mango",
+    "mothbeans",
+    "mungbean",
+    "muskmelon",
+    "orange",
+    "papaya",
+    "pigeonpeas",
+    "pomegranate",
+    "rice",
+    "watermelon"
+  ],
+  "total_classes": 22,
+  "total_samples": 2200,
+  "train_samples": 1760,
+  "test_samples": 440,
+  "metrics": {
+    "accuracy": 0.9955,
+    "precision": 0.9957,
+    "recall": 0.9955,
+    "f1_score": 0.9955
+  },
+  "feature_importances": {
+    "rainfall": 0.2302,
+    "humidity": 0.2242,
+    "K": 0.1754,
+    "P": 0.1508,
+    "N": 0.0964,
+    "temperature": 0.0724,
+    "ph": 0.0506
+  },
+  "crop_profiles": {
+    "apple": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 20.8
+      },
+      "P": {
+        "min": 120.0,
+        "max": 145.0,
+        "mean": 134.2
+      },
+      "K": {
+        "min": 195.0,
+        "max": 205.0,
+        "mean": 199.9
+      },
+      "temperature": {
+        "min": 21.0,
+        "max": 24.0,
+        "mean": 22.6
+      },
+      "humidity": {
+        "min": 90.0,
+        "max": 94.9,
+        "mean": 92.3
+      },
+      "ph": {
+        "min": 5.51,
+        "max": 6.5,
+        "mean": 5.93
+      },
+      "rainfall": {
+        "min": 100.1,
+        "max": 125.0,
+        "mean": 112.7
+      }
+    },
+    "banana": {
+      "samples": 100,
+      "N": {
+        "min": 80.0,
+        "max": 120.0,
+        "mean": 100.2
+      },
+      "P": {
+        "min": 70.0,
+        "max": 95.0,
+        "mean": 82.0
+      },
+      "K": {
+        "min": 45.0,
+        "max": 55.0,
+        "mean": 50.0
+      },
+      "temperature": {
+        "min": 25.0,
+        "max": 29.9,
+        "mean": 27.4
+      },
+      "humidity": {
+        "min": 75.0,
+        "max": 85.0,
+        "mean": 80.4
+      },
+      "ph": {
+        "min": 5.51,
+        "max": 6.49,
+        "mean": 5.98
+      },
+      "rainfall": {
+        "min": 90.1,
+        "max": 119.8,
+        "mean": 104.6
+      }
+    },
+    "blackgram": {
+      "samples": 100,
+      "N": {
+        "min": 20.0,
+        "max": 60.0,
+        "mean": 40.0
+      },
+      "P": {
+        "min": 55.0,
+        "max": 80.0,
+        "mean": 67.5
+      },
+      "K": {
+        "min": 15.0,
+        "max": 25.0,
+        "mean": 19.2
+      },
+      "temperature": {
+        "min": 25.1,
+        "max": 34.9,
+        "mean": 30.0
+      },
+      "humidity": {
+        "min": 60.1,
+        "max": 70.0,
+        "mean": 65.1
+      },
+      "ph": {
+        "min": 6.5,
+        "max": 7.78,
+        "mean": 7.13
+      },
+      "rainfall": {
+        "min": 60.4,
+        "max": 74.9,
+        "mean": 67.9
+      }
+    },
+    "chickpea": {
+      "samples": 100,
+      "N": {
+        "min": 20.0,
+        "max": 60.0,
+        "mean": 40.1
+      },
+      "P": {
+        "min": 55.0,
+        "max": 80.0,
+        "mean": 67.8
+      },
+      "K": {
+        "min": 75.0,
+        "max": 85.0,
+        "mean": 79.9
+      },
+      "temperature": {
+        "min": 17.0,
+        "max": 21.0,
+        "mean": 18.9
+      },
+      "humidity": {
+        "min": 14.3,
+        "max": 20.0,
+        "mean": 16.9
+      },
+      "ph": {
+        "min": 5.99,
+        "max": 8.87,
+        "mean": 7.34
+      },
+      "rainfall": {
+        "min": 65.1,
+        "max": 94.8,
+        "mean": 80.1
+      }
+    },
+    "coconut": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 22.0
+      },
+      "P": {
+        "min": 5.0,
+        "max": 30.0,
+        "mean": 16.9
+      },
+      "K": {
+        "min": 25.0,
+        "max": 35.0,
+        "mean": 30.6
+      },
+      "temperature": {
+        "min": 25.0,
+        "max": 29.9,
+        "mean": 27.4
+      },
+      "humidity": {
+        "min": 90.0,
+        "max": 100.0,
+        "mean": 94.8
+      },
+      "ph": {
+        "min": 5.5,
+        "max": 6.47,
+        "mean": 5.98
+      },
+      "rainfall": {
+        "min": 131.1,
+        "max": 225.6,
+        "mean": 175.7
+      }
+    },
+    "coffee": {
+      "samples": 100,
+      "N": {
+        "min": 80.0,
+        "max": 120.0,
+        "mean": 101.2
+      },
+      "P": {
+        "min": 15.0,
+        "max": 40.0,
+        "mean": 28.7
+      },
+      "K": {
+        "min": 25.0,
+        "max": 35.0,
+        "mean": 29.9
+      },
+      "temperature": {
+        "min": 23.1,
+        "max": 27.9,
+        "mean": 25.5
+      },
+      "humidity": {
+        "min": 50.0,
+        "max": 69.9,
+        "mean": 58.9
+      },
+      "ph": {
+        "min": 6.02,
+        "max": 7.49,
+        "mean": 6.79
+      },
+      "rainfall": {
+        "min": 115.2,
+        "max": 199.5,
+        "mean": 158.1
+      }
+    },
+    "cotton": {
+      "samples": 100,
+      "N": {
+        "min": 100.0,
+        "max": 140.0,
+        "mean": 117.8
+      },
+      "P": {
+        "min": 35.0,
+        "max": 60.0,
+        "mean": 46.2
+      },
+      "K": {
+        "min": 15.0,
+        "max": 25.0,
+        "mean": 19.6
+      },
+      "temperature": {
+        "min": 22.0,
+        "max": 26.0,
+        "mean": 24.0
+      },
+      "humidity": {
+        "min": 75.0,
+        "max": 84.9,
+        "mean": 79.8
+      },
+      "ph": {
+        "min": 5.8,
+        "max": 7.99,
+        "mean": 6.91
+      },
+      "rainfall": {
+        "min": 60.7,
+        "max": 99.9,
+        "mean": 80.4
+      }
+    },
+    "grapes": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 23.2
+      },
+      "P": {
+        "min": 120.0,
+        "max": 145.0,
+        "mean": 132.5
+      },
+      "K": {
+        "min": 195.0,
+        "max": 205.0,
+        "mean": 200.1
+      },
+      "temperature": {
+        "min": 8.8,
+        "max": 41.9,
+        "mean": 23.8
+      },
+      "humidity": {
+        "min": 80.0,
+        "max": 84.0,
+        "mean": 81.9
+      },
+      "ph": {
+        "min": 5.51,
+        "max": 6.5,
+        "mean": 6.03
+      },
+      "rainfall": {
+        "min": 65.0,
+        "max": 74.9,
+        "mean": 69.6
+      }
+    },
+    "jute": {
+      "samples": 100,
+      "N": {
+        "min": 60.0,
+        "max": 100.0,
+        "mean": 78.4
+      },
+      "P": {
+        "min": 35.0,
+        "max": 60.0,
+        "mean": 46.9
+      },
+      "K": {
+        "min": 35.0,
+        "max": 45.0,
+        "mean": 40.0
+      },
+      "temperature": {
+        "min": 23.1,
+        "max": 27.0,
+        "mean": 25.0
+      },
+      "humidity": {
+        "min": 70.9,
+        "max": 89.9,
+        "mean": 79.6
+      },
+      "ph": {
+        "min": 6.0,
+        "max": 7.49,
+        "mean": 6.73
+      },
+      "rainfall": {
+        "min": 150.2,
+        "max": 199.8,
+        "mean": 174.8
+      }
+    },
+    "kidneybeans": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 20.8
+      },
+      "P": {
+        "min": 55.0,
+        "max": 80.0,
+        "mean": 67.5
+      },
+      "K": {
+        "min": 15.0,
+        "max": 25.0,
+        "mean": 20.1
+      },
+      "temperature": {
+        "min": 15.3,
+        "max": 24.9,
+        "mean": 20.1
+      },
+      "humidity": {
+        "min": 18.1,
+        "max": 25.0,
+        "mean": 21.6
+      },
+      "ph": {
+        "min": 5.5,
+        "max": 6.0,
+        "mean": 5.75
+      },
+      "rainfall": {
+        "min": 60.3,
+        "max": 149.7,
+        "mean": 105.9
+      }
+    },
+    "lentil": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 18.8
+      },
+      "P": {
+        "min": 55.0,
+        "max": 80.0,
+        "mean": 68.4
+      },
+      "K": {
+        "min": 15.0,
+        "max": 25.0,
+        "mean": 19.4
+      },
+      "temperature": {
+        "min": 18.1,
+        "max": 29.9,
+        "mean": 24.5
+      },
+      "humidity": {
+        "min": 60.1,
+        "max": 69.9,
+        "mean": 64.8
+      },
+      "ph": {
+        "min": 5.92,
+        "max": 7.84,
+        "mean": 6.93
+      },
+      "rainfall": {
+        "min": 35.0,
+        "max": 54.9,
+        "mean": 45.7
+      }
+    },
+    "maize": {
+      "samples": 100,
+      "N": {
+        "min": 60.0,
+        "max": 100.0,
+        "mean": 77.8
+      },
+      "P": {
+        "min": 35.0,
+        "max": 60.0,
+        "mean": 48.4
+      },
+      "K": {
+        "min": 15.0,
+        "max": 25.0,
+        "mean": 19.8
+      },
+      "temperature": {
+        "min": 18.0,
+        "max": 26.5,
+        "mean": 22.4
+      },
+      "humidity": {
+        "min": 55.3,
+        "max": 74.8,
+        "mean": 65.1
+      },
+      "ph": {
+        "min": 5.51,
+        "max": 7.0,
+        "mean": 6.25
+      },
+      "rainfall": {
+        "min": 60.7,
+        "max": 109.8,
+        "mean": 84.8
+      }
+    },
+    "mango": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 20.1
+      },
+      "P": {
+        "min": 15.0,
+        "max": 40.0,
+        "mean": 27.2
+      },
+      "K": {
+        "min": 25.0,
+        "max": 35.0,
+        "mean": 29.9
+      },
+      "temperature": {
+        "min": 27.0,
+        "max": 36.0,
+        "mean": 31.2
+      },
+      "humidity": {
+        "min": 45.0,
+        "max": 55.0,
+        "mean": 50.2
+      },
+      "ph": {
+        "min": 4.51,
+        "max": 6.97,
+        "mean": 5.77
+      },
+      "rainfall": {
+        "min": 89.3,
+        "max": 100.8,
+        "mean": 94.7
+      }
+    },
+    "mothbeans": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 21.4
+      },
+      "P": {
+        "min": 35.0,
+        "max": 60.0,
+        "mean": 48.0
+      },
+      "K": {
+        "min": 15.0,
+        "max": 25.0,
+        "mean": 20.2
+      },
+      "temperature": {
+        "min": 24.0,
+        "max": 32.0,
+        "mean": 28.2
+      },
+      "humidity": {
+        "min": 40.0,
+        "max": 65.0,
+        "mean": 53.2
+      },
+      "ph": {
+        "min": 3.5,
+        "max": 9.94,
+        "mean": 6.83
+      },
+      "rainfall": {
+        "min": 30.9,
+        "max": 74.4,
+        "mean": 51.2
+      }
+    },
+    "mungbean": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 21.0
+      },
+      "P": {
+        "min": 35.0,
+        "max": 60.0,
+        "mean": 47.3
+      },
+      "K": {
+        "min": 15.0,
+        "max": 25.0,
+        "mean": 19.9
+      },
+      "temperature": {
+        "min": 27.0,
+        "max": 29.9,
+        "mean": 28.5
+      },
+      "humidity": {
+        "min": 80.0,
+        "max": 90.0,
+        "mean": 85.5
+      },
+      "ph": {
+        "min": 6.22,
+        "max": 7.2,
+        "mean": 6.72
+      },
+      "rainfall": {
+        "min": 36.1,
+        "max": 59.9,
+        "mean": 48.4
+      }
+    },
+    "muskmelon": {
+      "samples": 100,
+      "N": {
+        "min": 80.0,
+        "max": 120.0,
+        "mean": 100.3
+      },
+      "P": {
+        "min": 5.0,
+        "max": 30.0,
+        "mean": 17.7
+      },
+      "K": {
+        "min": 45.0,
+        "max": 55.0,
+        "mean": 50.1
+      },
+      "temperature": {
+        "min": 27.0,
+        "max": 29.9,
+        "mean": 28.7
+      },
+      "humidity": {
+        "min": 90.0,
+        "max": 95.0,
+        "mean": 92.3
+      },
+      "ph": {
+        "min": 6.0,
+        "max": 6.78,
+        "mean": 6.36
+      },
+      "rainfall": {
+        "min": 20.2,
+        "max": 29.9,
+        "mean": 24.7
+      }
+    },
+    "orange": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 19.6
+      },
+      "P": {
+        "min": 5.0,
+        "max": 30.0,
+        "mean": 16.6
+      },
+      "K": {
+        "min": 5.0,
+        "max": 15.0,
+        "mean": 10.0
+      },
+      "temperature": {
+        "min": 10.0,
+        "max": 34.9,
+        "mean": 22.8
+      },
+      "humidity": {
+        "min": 90.0,
+        "max": 95.0,
+        "mean": 92.2
+      },
+      "ph": {
+        "min": 6.01,
+        "max": 8.0,
+        "mean": 7.02
+      },
+      "rainfall": {
+        "min": 100.2,
+        "max": 119.7,
+        "mean": 110.5
+      }
+    },
+    "papaya": {
+      "samples": 100,
+      "N": {
+        "min": 31.0,
+        "max": 70.0,
+        "mean": 49.9
+      },
+      "P": {
+        "min": 46.0,
+        "max": 70.0,
+        "mean": 59.0
+      },
+      "K": {
+        "min": 45.0,
+        "max": 55.0,
+        "mean": 50.0
+      },
+      "temperature": {
+        "min": 23.0,
+        "max": 43.7,
+        "mean": 33.7
+      },
+      "humidity": {
+        "min": 90.0,
+        "max": 94.9,
+        "mean": 92.4
+      },
+      "ph": {
+        "min": 6.5,
+        "max": 6.99,
+        "mean": 6.74
+      },
+      "rainfall": {
+        "min": 40.4,
+        "max": 248.9,
+        "mean": 142.6
+      }
+    },
+    "pigeonpeas": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 20.7
+      },
+      "P": {
+        "min": 55.0,
+        "max": 80.0,
+        "mean": 67.7
+      },
+      "K": {
+        "min": 15.0,
+        "max": 25.0,
+        "mean": 20.3
+      },
+      "temperature": {
+        "min": 18.3,
+        "max": 37.0,
+        "mean": 27.7
+      },
+      "humidity": {
+        "min": 30.4,
+        "max": 69.7,
+        "mean": 48.1
+      },
+      "ph": {
+        "min": 4.55,
+        "max": 7.45,
+        "mean": 5.79
+      },
+      "rainfall": {
+        "min": 90.1,
+        "max": 198.8,
+        "mean": 149.5
+      }
+    },
+    "pomegranate": {
+      "samples": 100,
+      "N": {
+        "min": 0.0,
+        "max": 40.0,
+        "mean": 18.9
+      },
+      "P": {
+        "min": 5.0,
+        "max": 30.0,
+        "mean": 18.8
+      },
+      "K": {
+        "min": 35.0,
+        "max": 45.0,
+        "mean": 40.2
+      },
+      "temperature": {
+        "min": 18.1,
+        "max": 25.0,
+        "mean": 21.8
+      },
+      "humidity": {
+        "min": 85.1,
+        "max": 95.0,
+        "mean": 90.1
+      },
+      "ph": {
+        "min": 5.56,
+        "max": 7.2,
+        "mean": 6.43
+      },
+      "rainfall": {
+        "min": 102.5,
+        "max": 112.5,
+        "mean": 107.5
+      }
+    },
+    "rice": {
+      "samples": 100,
+      "N": {
+        "min": 60.0,
+        "max": 99.0,
+        "mean": 79.9
+      },
+      "P": {
+        "min": 35.0,
+        "max": 60.0,
+        "mean": 47.6
+      },
+      "K": {
+        "min": 35.0,
+        "max": 45.0,
+        "mean": 39.9
+      },
+      "temperature": {
+        "min": 20.0,
+        "max": 26.9,
+        "mean": 23.7
+      },
+      "humidity": {
+        "min": 80.1,
+        "max": 85.0,
+        "mean": 82.3
+      },
+      "ph": {
+        "min": 5.01,
+        "max": 7.87,
+        "mean": 6.43
+      },
+      "rainfall": {
+        "min": 182.6,
+        "max": 298.6,
+        "mean": 236.2
+      }
+    },
+    "watermelon": {
+      "samples": 100,
+      "N": {
+        "min": 80.0,
+        "max": 120.0,
+        "mean": 99.4
+      },
+      "P": {
+        "min": 5.0,
+        "max": 30.0,
+        "mean": 17.0
+      },
+      "K": {
+        "min": 45.0,
+        "max": 55.0,
+        "mean": 50.2
+      },
+      "temperature": {
+        "min": 24.0,
+        "max": 27.0,
+        "mean": 25.6
+      },
+      "humidity": {
+        "min": 80.0,
+        "max": 90.0,
+        "mean": 85.2
+      },
+      "ph": {
+        "min": 6.0,
+        "max": 6.96,
+        "mean": 6.5
+      },
+      "rainfall": {
+        "min": 40.1,
+        "max": 59.8,
+        "mean": 50.8
+      }
+    }
+  },
+  "evaluation_summary": {
+    "apple": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "banana": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "blackgram": {
+      "precision": 1.0,
+      "recall": 0.95,
+      "f1-score": 0.9743589743589743,
+      "support": 20.0
+    },
+    "chickpea": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "coconut": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "coffee": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "cotton": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "grapes": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "jute": {
+      "precision": 0.9523809523809523,
+      "recall": 1.0,
+      "f1-score": 0.975609756097561,
+      "support": 20.0
+    },
+    "kidneybeans": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "lentil": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "maize": {
+      "precision": 0.9523809523809523,
+      "recall": 1.0,
+      "f1-score": 0.975609756097561,
+      "support": 20.0
+    },
+    "mango": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "mothbeans": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "mungbean": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "muskmelon": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "orange": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "papaya": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "pigeonpeas": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "pomegranate": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "rice": {
+      "precision": 1.0,
+      "recall": 0.95,
+      "f1-score": 0.9743589743589743,
+      "support": 20.0
+    },
+    "watermelon": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "accuracy": 0.9954545454545455,
+    "macro avg": {
+      "precision": 0.9956709956709957,
+      "recall": 0.9954545454545454,
+      "f1-score": 0.9954517027687758,
+      "support": 440.0
+    },
+    "weighted avg": {
+      "precision": 0.9956709956709956,
+      "recall": 0.9954545454545455,
+      "f1-score": 0.9954517027687759,
+      "support": 440.0
+    }
+  }
+}

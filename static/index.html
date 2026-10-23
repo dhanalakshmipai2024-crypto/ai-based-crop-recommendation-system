@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriVision - Precision Crop Recommendation System</title>
+  <meta name="description" content="Professional agricultural decision support system providing crop recommendations based on soil chemistry and weather parameters.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"/>
+            <path d="M12 6c-3.314 0-6 2.686-6 6 0 2.21 1.79 4 4 4 1.105 0 2-.895 2-2 0-1.105.895-2 2-2 2.21 0 4-1.79 4-4 0-3.314-2.686-6-6-6z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">AgriVision</div>
+          <div class="brand-subtitle">Crop Recommendation System</div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" role="tablist" aria-label="Main Navigation">
+        <button class="nav-tab active" data-tab="tab-recommender" id="tab-btn-recommender" role="tab" aria-selected="true">
+          Recommender
+        </button>
+        <button class="nav-tab" data-tab="tab-crops" id="tab-btn-crops" role="tab" aria-selected="false">
+          Crop Directory
+        </button>
+        <button class="nav-tab" data-tab="tab-analytics" id="tab-btn-analytics" role="tab" aria-selected="false">
+          Model Analytics
+        </button>
+        <button class="nav-tab" data-tab="tab-qa" id="tab-btn-qa" role="tab" aria-selected="false">
+          QA Test Suite
+        </button>
+        <button class="nav-tab" data-tab="tab-batch" id="tab-btn-batch" role="tab" aria-selected="false">
+          Batch Plots
+        </button>
+      </nav>
+
+      <!-- System Status -->
+      <div class="system-status">
+        <span class="status-indicator"></span>
+        <span class="status-text">Random Forest Online (99.55%)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Top Key Statistics Bar -->
+    <section class="metrics-bar">
+      <div class="metric-item">
+        <div class="metric-number">99.55%</div>
+        <div class="metric-desc">Holdout Accuracy</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-number">22</div>
+        <div class="metric-desc">Crop Varieties</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-number">2,200</div>
+        <div class="metric-desc">Validated Soil Profiles</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-number">Live Satellite</div>
+        <div class="metric-desc">Open-Meteo Weather API</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-number">&lt; 80 ms</div>
+        <div class="metric-desc">Inference Latency</div>
+      </div>
+    </section>
+
+    <!-- TAB 1: RECOMMENDER STUDIO -->
+    <section class="tab-panel active" id="tab-recommender">
+      <div class="studio-grid">
+
+        <!-- LEFT COLUMN: INPUT CONTROLS -->
+        <div class="card control-card">
+          <div class="card-header-flex">
+            <div>
+              <h2 class="card-title">Soil & Weather Parameters</h2>
+              <p class="card-subtitle">Enter field measurements or load a regional agro-climatic preset.</p>
+            </div>
+            <button type="button" class="btn-text" id="btn-reset">Reset Values</button>
+          </div>
+
+          <!-- Quick Presets -->
+          <div class="presets-container-wrap">
+            <div class="presets-header">
+              <span class="presets-label">Regional Presets</span>
+              <span class="presets-hint">Click any preset to auto-fill inputs</span>
+            </div>
+            <div class="presets-row" id="presets-container">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+
+          <!-- Live Weather Auto-Fetch Bar -->
+          <div class="weather-panel">
+            <div class="weather-panel-header">
+              <span class="weather-panel-title">Fetch Live Weather by Location</span>
+              <span class="weather-panel-badge">Open-Meteo</span>
+            </div>
+            <div class="weather-input-group">
+              <input type="text" id="city-input" class="form-input" placeholder="Enter city name (e.g. Pune, London, Des Moines...)" aria-label="City Name">
+              <button type="button" class="btn btn-secondary" id="btn-fetch-weather">Fetch Weather</button>
+            </div>
+            <div id="weather-alert" class="weather-alert hidden"></div>
+          </div>
+
+          <!-- 7 Input Parameters Form -->
+          <form id="crop-form" class="form-grid">
+
+            <!-- Nitrogen (N) -->
+            <div class="param-box" id="card-n">
+              <div class="param-header">
+                <label for="input-n" class="param-title">Nitrogen (N)</label>
+                <div class="param-value-wrap">
+                  <input type="number" id="input-n" min="0" max="200" step="1" value="90" class="numeric-field">
+                  <span class="field-unit">kg/ha</span>
+                </div>
+              </div>
+              <div class="slider-container">
+                <input type="range" id="slider-n" min="0" max="200" step="1" value="90" class="slider-field">
+              </div>
+              <div class="param-footer">
+                <span class="range-hint">0 – 200 kg/ha</span>
+                <span class="status-tag tag-normal" id="status-n">Balanced</span>
+              </div>
+            </div>
+
+            <!-- Phosphorus (P) -->
+            <div class="param-box" id="card-p">
+              <div class="param-header">
+                <label for="input-p" class="param-title">Phosphorus (P)</label>
+                <div class="param-value-wrap">
+                  <input type="number" id="input-p" min="0" max="200" step="1" value="42" class="numeric-field">
+                  <span class="field-unit">kg/ha</span>
+                </div>
+              </div>
+              <div class="slider-container">
+                <input type="range" id="slider-p" min="0" max="200" step="1" value="42" class="slider-field">
+              </div>
+              <div class="param-footer">
+                <span class="range-hint">0 – 200 kg/ha</span>
+                <span class="status-tag tag-normal" id="status-p">Balanced</span>
+              </div>
+            </div>
+
+            <!-- Potassium (K) -->
+            <div class="param-box" id="card-k">
+              <div class="param-header">
+                <label for="input-k" class="param-title">Potassium (K)</label>
+                <div class="param-value-wrap">
+                  <input type="number" id="input-k" min="0" max="200" step="1" value="43" class="numeric-field">
+                  <span class="field-unit">kg/ha</span>
+                </div>
+              </div>
+              <div class="slider-container">
+                <input type="range" id="slider-k" min="0" max="200" step="1" value="43" class="slider-field">
+              </div>
+              <div class="param-footer">
+                <span class="range-hint">0 – 200 kg/ha</span>
+                <span class="status-tag tag-normal" id="status-k">Balanced</span>
+              </div>
+            </div>
+
+            <!-- Temperature -->
+            <div class="param-box" id="card-temperature">
+              <div class="param-header">
+                <label for="input-temperature" class="param-title">Temperature</label>
+                <div class="param-value-wrap">
+                  <input type="number" id="input-temperature" min="0" max="60" step="0.1" value="23.5" class="numeric-field">
+                  <span class="field-unit">°C</span>
+                </div>
+              </div>
+              <div class="slider-container">
+                <input type="range" id="slider-temperature" min="0" max="60" step="0.5" value="23.5" class="slider-field">
+              </div>
+              <div class="param-footer">
+                <span class="range-hint">0 – 60 °C</span>
+                <span class="status-tag tag-normal" id="status-temperature">Tropical Warm</span>
+              </div>
+            </div>
+
+            <!-- Humidity -->
+            <div class="param-box" id="card-humidity">
+              <div class="param-header">
+                <label for="input-humidity" class="param-title">Humidity</label>
+                <div class="param-value-wrap">
+                  <input type="number" id="input-humidity" min="0" max="100" step="0.5" value="82.0" class="numeric-field">
+                  <span class="field-unit">%</span>
+                </div>
+              </div>
+              <div class="slider-container">
+                <input type="range" id="slider-humidity" min="0" max="100" step="1" value="82" class="slider-field">
+              </div>
+              <div class="param-footer">
+                <span class="range-hint">0 – 100 %</span>
+                <span class="status-tag tag-normal" id="status-humidity">Humid</span>
+              </div>
+            </div>
+
+            <!-- Soil pH -->
+            <div class="param-box" id="card-ph">
+              <div class="param-header">
+                <label for="input-ph" class="param-title">Soil pH Reaction</label>
+                <div class="param-value-wrap">
+                  <input type="number" id="input-ph" min="0" max="14" step="0.1" value="6.5" class="numeric-field">
+                  <span class="field-unit">pH</span>
+                </div>
+              </div>
+              <div class="slider-container">
+                <input type="range" id="slider-ph" min="0" max="14" step="0.1" value="6.5" class="slider-field">
+              </div>
+              <div class="param-footer">
+                <span class="range-hint">0 – 14 scale</span>
+                <span class="status-tag tag-normal" id="status-ph">Near Neutral</span>
+              </div>
+            </div>
+
+            <!-- Rainfall -->
+            <div class="param-box col-span-2" id="card-rainfall">
+              <div class="param-header">
+                <label for="input-rainfall" class="param-title">Precipitation / Rainfall</label>
+                <div class="param-value-wrap">
+                  <input type="number" id="input-rainfall" min="0" max="500" step="1" value="200" class="numeric-field">
+                  <span class="field-unit">mm</span>
+                </div>
+              </div>
+              <div class="slider-container">
+                <input type="range" id="slider-rainfall" min="0" max="500" step="5" value="200" class="slider-field">
+              </div>
+              <div class="param-footer">
+                <span class="range-hint">0 – 500 mm</span>
+                <span class="status-tag tag-normal" id="status-rainfall">Monsoon Abundant</span>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="col-span-2 form-submit-row">
+              <button type="submit" class="btn btn-primary" id="btn-predict">
+                Recommend Optimal Crop
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- RIGHT COLUMN: RESULTS PANEL -->
+        <div class="results-column" id="results-panel">
+
+          <!-- Empty State -->
+          <div class="card empty-card" id="empty-state-card">
+            <div class="empty-icon-box">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <h3 class="empty-headline">Awaiting Field Parameters</h3>
+            <p class="empty-subtext">
+              Adjust the 7 soil and climate inputs on the left or select a preset, then click <strong>"Recommend Optimal Crop"</strong> to generate the prediction.
+            </p>
+            <div class="empty-specs-list">
+              <div class="empty-spec-pill">Random Forest Classifier (100 Trees)</div>
+              <div class="empty-spec-pill">Multi-Class Probability Distribution</div>
+              <div class="empty-spec-pill">Soil Reaction & NPK Balance Analysis</div>
+              <div class="empty-spec-pill">Tailored Field Advisory</div>
+            </div>
+          </div>
+
+          <!-- Loading State -->
+          <div class="card loading-card hidden" id="loading-card">
+            <div class="loading-ring"></div>
+            <h3 class="loading-headline">Analyzing Soil & Agro-Climate Profiles...</h3>
+            <p class="loading-subtext">Computing multi-class decision probabilities against 22 crop benchmarks</p>
+          </div>
+
+          <!-- Active Results Dashboard -->
+          <div class="results-dashboard hidden" id="dashboard-card">
+
+            <!-- Primary Crop Recommendation Card -->
+            <div class="card winner-card">
+              <div class="winner-top-row">
+                <div class="winner-main-info">
+                  <span class="winner-label">Recommended Crop</span>
+                  <div class="winner-title-group">
+                    <span class="winner-crop-icon" id="res-icon">🌱</span>
+                    <div>
+                      <h1 class="winner-crop-name" id="res-crop-name">Rice</h1>
+                      <div class="winner-scientific-name" id="res-botanical">Oryza sativa</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="winner-badge-metric">
+                  <div class="metric-pill-large">
+                    <span class="metric-pill-val" id="res-confidence">98.5%</span>
+                    <span class="metric-pill-lbl">Confidence</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Key Agronomic Attributes -->
+              <div class="crop-attributes-grid">
+                <div class="attr-box">
+                  <span class="attr-title">Category</span>
+                  <span class="attr-text" id="res-category">Cereal / Staple</span>
+                </div>
+                <div class="attr-box">
+                  <span class="attr-title">Growth Cycle</span>
+                  <span class="attr-text" id="res-growth">110-140 Days</span>
+                </div>
+                <div class="attr-box">
+                  <span class="attr-title">Water Requirement</span>
+                  <span class="attr-text" id="res-water">Very High (Standing)</span>
+                </div>
+                <div class="attr-box">
+                  <span class="attr-title">Soil Preference</span>
+                  <span class="attr-text" id="res-soil">Clay & Clay Loams</span>
+                </div>
+              </div>
+
+              <!-- Market Profile -->
+              <div class="market-note-box">
+                <strong class="market-note-lbl">Market Outlook:</strong>
+                <span id="res-market" class="market-note-text">World staple grain with strong domestic demand and established support prices.</span>
+              </div>
+            </div>
+
+            <!-- Top Contender Alternatives -->
+            <div class="card sub-card">
+              <h3 class="sub-card-title">Top Alternative Crops & Probabilities</h3>
+              <p class="sub-card-desc">Comparative multi-class probability breakdown across all trained agricultural classes.</p>
+              <div class="contenders-container" id="res-contenders-list">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Soil & pH Diagnostics -->
+            <div class="card sub-card">
+              <h3 class="sub-card-title">Soil Diagnostics & Reaction Assessment</h3>
+              <div class="diagnostics-columns">
+
+                <!-- pH Analysis -->
+                <div class="diag-panel">
+                  <div class="diag-header-row">
+                    <h4 class="diag-heading">Soil pH Level</h4>
+                    <span class="status-tag tag-normal" id="res-ph-badge">Optimal Neutral</span>
+                  </div>
+                  <p class="diag-paragraph" id="res-ph-advice">Soil reaction is within the optimal band for maximum macro and micronutrient uptake.</p>
+                  <div class="ph-track">
+                    <div class="ph-pointer" id="res-ph-marker" style="left: 46%;"></div>
+                  </div>
+                  <div class="ph-labels-row">
+                    <span>Acidic (&lt; 6.0)</span>
+                    <span>Neutral (6.5 - 7.5)</span>
+                    <span>Alkaline (&gt; 8.0)</span>
+                  </div>
+                </div>
+
+                <!-- NPK Balance -->
+                <div class="diag-panel">
+                  <div class="diag-header-row">
+                    <h4 class="diag-heading">N-P-K Nutrient Status</h4>
+                    <span class="status-tag tag-neutral" id="res-npk-ratio">90 : 42 : 43</span>
+                  </div>
+                  <div class="npk-items-list">
+                    <div class="npk-item-line">
+                      <strong class="npk-key">Nitrogen (N):</strong>
+                      <span id="res-msg-n" class="npk-val">Balanced</span>
+                    </div>
+                    <div class="npk-item-line">
+                      <strong class="npk-key">Phosphorus (P):</strong>
+                      <span id="res-msg-p" class="npk-val">Balanced</span>
+                    </div>
+                    <div class="npk-item-line">
+                      <strong class="npk-key">Potassium (K):</strong>
+                      <span id="res-msg-k" class="npk-val">Balanced</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Agronomic Action Plan -->
+            <div class="card sub-card">
+              <h3 class="sub-card-title">Agronomic Field Advisory</h3>
+              <div class="advisory-quad-grid">
+                <div class="advisory-card-item">
+                  <div class="advisory-card-head">Seedbed Preparation</div>
+                  <p id="res-adv-soil" class="advisory-card-body">Puddle soil to create an impermeable hardpan that conserves standing water.</p>
+                </div>
+                <div class="advisory-card-item">
+                  <div class="advisory-card-head">Fertilizer Application</div>
+                  <p id="res-adv-fert" class="advisory-card-body">Split Nitrogen application: 50% basal, 25% at tillering, 25% at panicle emergence.</p>
+                </div>
+                <div class="advisory-card-item">
+                  <div class="advisory-card-head">Irrigation Schedule</div>
+                  <p id="res-adv-water" class="advisory-card-body">Maintain shallow standing water layer; drain field 10 days before harvest.</p>
+                </div>
+                <div class="advisory-card-item">
+                  <div class="advisory-card-head">Agronomic Best Practice</div>
+                  <p id="res-adv-tips" class="advisory-card-body">Practice crop rotation with green legumes to restore natural soil fertility.</p>
+                </div>
+              </div>
+
+              <div class="advisory-actions-row">
+                <button type="button" class="btn btn-secondary" onclick="window.print()">
+                  Print / Save Advisory Report
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: CROP DIRECTORY -->
+    <section class="tab-panel" id="tab-crops">
+      <div class="card">
+        <div class="directory-top-bar">
+          <div>
+            <h2 class="section-heading">Crop Encyclopedia</h2>
+            <p class="section-subheading">View agronomic requirements, benchmark parameters, and growth cycles for all 22 supported crops.</p>
+          </div>
+          <div class="search-input-wrap">
+            <input type="text" id="crop-search" class="form-input search-box" placeholder="Search crop or category...">
+          </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="filter-pills-bar" id="crop-category-filters">
+          <button type="button" class="filter-tab active" data-filter="all">All Crops (22)</button>
+          <button type="button" class="filter-tab" data-filter="cereal">Cereals & Grains</button>
+          <button type="button" class="filter-tab" data-filter="pulse">Pulses & Legumes</button>
+          <button type="button" class="filter-tab" data-filter="fruit">Fruits</button>
+          <button type="button" class="filter-tab" data-filter="cash">Commercial & Cash Crops</button>
+        </div>
+
+        <!-- Crop Cards Grid -->
+        <div class="directory-grid" id="crop-grid">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: MODEL ANALYTICS -->
+    <section class="tab-panel" id="tab-analytics">
+      <div class="analytics-vertical-stack">
+
+        <!-- Top Metrics Cards -->
+        <div class="stats-four-grid">
+          <div class="card stat-card">
+            <span class="stat-card-title">Holdout Accuracy</span>
+            <div class="stat-card-value text-green">99.55%</div>
+            <span class="stat-card-note">Stratified 20% test partition (440 samples)</span>
+          </div>
+          <div class="card stat-card">
+            <span class="stat-card-title">Weighted Precision</span>
+            <div class="stat-card-value text-green">99.57%</div>
+            <span class="stat-card-note">High positive predictive value across classes</span>
+          </div>
+          <div class="card stat-card">
+            <span class="stat-card-title">Weighted Recall</span>
+            <div class="stat-card-value text-green">99.55%</div>
+            <span class="stat-card-note">Consistent sensitivity across all 22 labels</span>
+          </div>
+          <div class="card stat-card">
+            <span class="stat-card-title">Weighted F1-Score</span>
+            <div class="stat-card-value text-green">99.55%</div>
+            <span class="stat-card-note">Harmonic mean balance of precision and recall</span>
+          </div>
+        </div>
+
+        <!-- Feature Importance Breakdown -->
+        <div class="card">
+          <div class="card-header-flex">
+            <div>
+              <h3 class="card-title">Random Forest Feature Importance Analysis</h3>
+              <p class="card-subtitle">Mean Gini impurity reduction across all 100 decision trees in the ensemble.</p>
+            </div>
+            <span class="status-tag tag-neutral">100 Estimators</span>
+          </div>
+
+          <div class="feature-importance-list" id="feature-bars-list">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+        <!-- Dataset Architecture -->
+        <div class="card">
+          <h3 class="card-title">Dataset Integrity & Architecture</h3>
+          <p class="card-subtitle">Pre-flight checks, sample distributions, and split methodology.</p>
+
+          <div class="data-specs-grid">
+            <div class="data-spec-card">
+              <span class="data-spec-num">2,200</span>
+              <span class="data-spec-title">Total Records</span>
+              <p class="data-spec-desc">Evenly distributed across 22 classes with exactly 100 observations per crop.</p>
+            </div>
+            <div class="data-spec-card">
+              <span class="data-spec-num">0</span>
+              <span class="data-spec-title">Missing Values</span>
+              <p class="data-spec-desc">Verified 100% complete dataset with zero null or NaN records across all features.</p>
+            </div>
+            <div class="data-spec-card">
+              <span class="data-spec-num">0</span>
+              <span class="data-spec-title">Duplicate Rows</span>
+              <p class="data-spec-desc">All rows checked for uniqueness to prevent inflated evaluation metrics.</p>
+            </div>
+            <div class="data-spec-card">
+              <span class="data-spec-num">80 / 20</span>
+              <span class="data-spec-title">Stratified Split</span>
+              <p class="data-spec-desc">1,760 training samples and 440 holdout test samples with fixed random seed 42.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 4: QA TEST SUITE -->
+    <section class="tab-panel" id="tab-qa">
+      <div class="card">
+        <div class="card-header-flex">
+          <div>
+            <h2 class="card-title">Automated QA Benchmark & Verification Suite</h2>
+            <p class="card-subtitle">
+              Executes the 10 benchmark test cases (T1 - T10) from the project specification, recording observed outputs and latency.
+            </p>
+          </div>
+          <button type="button" class="btn btn-primary" id="btn-run-tests">
+            Run All Test Cases
+          </button>
+        </div>
+
+        <!-- QA Summary Strip -->
+        <div class="qa-summary-strip">
+          <div class="qa-summary-col">
+            <span class="qa-sum-lbl">Suite Status:</span>
+            <span class="status-tag tag-normal" id="qa-overall-status">Ready to Run</span>
+          </div>
+          <div class="qa-summary-col">
+            <span class="qa-sum-lbl">Total Scenarios:</span>
+            <span id="qa-total-count" class="qa-sum-val">10 Test Cases</span>
+          </div>
+          <div class="qa-summary-col">
+            <span class="qa-sum-lbl">Execution Time:</span>
+            <span id="qa-total-time" class="qa-sum-val">--</span>
+          </div>
+        </div>
+
+        <!-- QA Table -->
+        <div class="table-wrap">
+          <table class="standard-table" id="qa-table">
+            <thead>
+              <tr>
+                <th style="width: 60px;">ID</th>
+                <th>Test Scenario</th>
+                <th>Expected Outcome</th>
+                <th>Observed Output</th>
+                <th style="width: 100px;">Latency</th>
+                <th style="width: 90px;">Status</th>
+              </tr>
+            </thead>
+            <tbody id="qa-table-body">
+              <tr>
+                <td colspan="6" class="table-empty-row">Click "Run All Test Cases" above to execute live test benchmarks.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: BATCH PLOT TESTER -->
+    <section class="tab-panel" id="tab-batch">
+      <div class="card">
+        <div class="card-header-flex">
+          <div>
+            <h2 class="card-title">Multi-Plot Farm Soil Batch Evaluator</h2>
+            <p class="card-subtitle">Evaluate recommendations across multiple agricultural farm plots in a single batch.</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="btn-run-batch">
+            Evaluate All Plots
+          </button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="standard-table">
+            <thead>
+              <tr>
+                <th>Plot ID</th>
+                <th>Region / Soil Type</th>
+                <th>N</th>
+                <th>P</th>
+                <th>K</th>
+                <th>Temp</th>
+                <th>Humidity</th>
+                <th>pH</th>
+                <th>Rainfall</th>
+                <th>Predicted Crop</th>
+                <th>Confidence</th>
+              </tr>
+            </thead>
+            <tbody id="batch-table-body">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Clean Minimalist Footer -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <strong>AgriVision</strong> — Precision Crop Recommendation System
+      </div>
+      <div class="footer-links">
+        <a href="/api/health" target="_blank" class="footer-anchor">Health Check</a>
+        <a href="/api/metrics" target="_blank" class="footer-anchor">Metrics API</a>
+        <a href="/api/crops" target="_blank" class="footer-anchor">Crops API</a>
+        <a href="/api/tests" target="_blank" class="footer-anchor">QA Tests API</a>
+      </div>
+      <div class="footer-right">
+        Machine Learning Agricultural Decision Support
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
